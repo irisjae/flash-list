@@ -1,0 +1,1 @@
+{"version":3,"file":"BidirectionalList.d.ts","sourceRoot":"","sources":["../src/BidirectionalList.ts"],"names":[],"mappings":"AAAA;;;KAGK;AACL,OAAO,KAAK,EAAE,SAAS,EAAE,MAAM,OAAO,CAAC;AACvC,OAAO,EAAoC,SAAS,EAAE,MAAM,cAAc,CAAC;AAW3E,UAAU,sBAAsB;IAC9B,KAAK,EAAE,SAAS,CAAC;IACjB,QAAQ,EAAE,SAAS,CAAC;CACrB;AAID,QAAA,MAAM,iBAAiB,8DACwC,CAAC;AAMhE,OAAO,EAAE,iBAAiB,EAAE,CAAC"}
