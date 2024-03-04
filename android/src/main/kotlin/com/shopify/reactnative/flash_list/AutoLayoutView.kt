@@ -77,7 +77,7 @@ class AutoLayoutView(context: Context) : ReactViewGroup(context) {
             alShadow.offsetFromStart = if (alShadow.horizontal) left else top
             alShadow.clearGapsAndOverlaps(
                     positionSortedViews,
-                    getParentScrollView() as ScrollView,
+                    if (alShadow.horizontal) null else getParentScrollView() as ScrollView,
             )
         }
     }
