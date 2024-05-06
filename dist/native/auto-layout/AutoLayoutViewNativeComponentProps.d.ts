@@ -1,0 +1,32 @@
+import { ReactNode } from "react";
+export interface OnBlankAreaEvent {
+    nativeEvent: {
+        offsetStart: number;
+        offsetEnd: number;
+    };
+}
+export interface OnAutoLayoutEvent {
+    nativeEvent: {
+        layouts: {
+            key: number;
+            height: number;
+            y: number;
+        }[];
+        autoLayoutId: number;
+    };
+}
+declare type OnBlankAreaEventHandler = (event: OnBlankAreaEvent) => void;
+declare type OnAutoLayoutHandler = (rawEvent: OnAutoLayoutEvent) => void;
+export interface AutoLayoutViewNativeComponentProps {
+    children?: ReactNode;
+    onBlankAreaEvent: OnBlankAreaEventHandler;
+    onAutoLayout: OnAutoLayoutHandler;
+    enableInstrumentation: boolean;
+    enableAutoLayoutInfo?: boolean;
+    disableAutoLayout?: boolean;
+    autoLayoutId?: number;
+    preservedIndex?: number;
+    renderId?: number;
+}
+export {};
+//# sourceMappingURL=AutoLayoutViewNativeComponentProps.d.ts.map
