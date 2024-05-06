@@ -79,19 +79,19 @@ import UIKit
         super.layoutSubviews()
         fixLayout()
 
-        let scrollView = getScrollView()
+        guard let scrollView = getScrollView() else { return }
 
-        let scrollContainerSize: CGFloat = horizontal ? scrollView.frame.width : scrollView.frame.height
+        let scrollContainerSize = horizontal ? scrollView.frame.width : scrollView.frame.height
         NSLog("COCO: native scrollContainerSize " + String(Float(scrollContainerSize)));
-        let currentScrollOffset: CGFloat = horizontal ? scrollView.contentOffset.x : scrollView.contentOffset.y
+        let currentScrollOffset = horizontal ? scrollView.contentOffset.x : scrollView.contentOffset.y
         NSLog("COCO: native currentScrollOffset " + String(Float(currentScrollOffset)));
-        let startOffset: CGFloat = horizontal ? frame.minX : frame.minY
+        let startOffset = horizontal ? frame.minX : frame.minY
         NSLog("COCO: native startOffset " + String(Float(startOffset)));
-        let endOffset: CGFloat = horizontal ? frame.maxX : frame.maxY
+        let endOffset = horizontal ? frame.maxX : frame.maxY
         NSLog("COCO: native endOffset " + String(Float(endOffset)));
-        let distanceFromWindowStart: CGFloat = max(startOffset - currentScrollOffset, 0)
+        let distanceFromWindowStart = max(startOffset - currentScrollOffset, 0)
         NSLog("COCO: native distanceFromWindowStart " + String(Float(distanceFromWindowStart)));
-        let distanceFromWindowEnd: CGFloat = max(currentScrollOffset + scrollContainerSize - endOffset, 0)
+        let distanceFromWindowEnd = max(currentScrollOffset + scrollContainerSize - endOffset, 0)
         NSLog("COCO: native distanceFromWindowEnd " + String(Float(distanceFromWindowEnd)));
 
         if enableInstrumentation {
