@@ -82,11 +82,17 @@ import UIKit
         guard enableInstrumentation, let scrollView = getScrollView() else { return }
 
         let scrollContainerSize = horizontal ? scrollView.frame.width : scrollView.frame.height
+        NSLog("COCO: native scrollContainerSize " + String(scrollContainerSize));
         let currentScrollOffset = horizontal ? scrollView.contentOffset.x : scrollView.contentOffset.y
+        NSLog("COCO: native currentScrollOffset " + String(currentScrollOffset));
         let startOffset = horizontal ? frame.minX : frame.minY
+        NSLog("COCO: native startOffset " + String(startOffset));
         let endOffset = horizontal ? frame.maxX : frame.maxY
+        NSLog("COCO: native endOffset " + String(endOffset));
         let distanceFromWindowStart = max(startOffset - currentScrollOffset, 0)
+        NSLog("COCO: native distanceFromWindowStart " + String(distanceFromWindowStart));
         let distanceFromWindowEnd = max(currentScrollOffset + scrollContainerSize - endOffset, 0)
+        NSLog("COCO: native distanceFromWindowEnd " + String(distanceFromWindowEnd));
 
         let (blankOffsetStart, blankOffsetEnd) = computeBlankFromGivenOffset(
             currentScrollOffset - startOffset,
@@ -172,7 +178,7 @@ NSLog ("COCO: preserved cell of index " + String(preservedIndex) + " at y " + St
 
 	NSLog("COCO: clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
 
-        for i in 0..<(cellContainers.count - 1) {
+        for i in 0..<cellContainers.cou ) {
 NSLog ("COCO: original cell of index " + String(cellContainers[i].index) + " at y " + String(Float (cellContainers[i].frame.origin.y)) + " , top " + String (cellContainers[i].top))
 	}
 
@@ -368,7 +374,7 @@ NSLog ("COCO: original cell of index " + String(cellContainers[i].index) + " at 
     }
 
     private func emitAutoLayout(for cellContainers: [CellContainer]) {
-	NSLog("COCO emitAutoLayout " + String (autoLayoutId) + " with preserved " + String (preservedIndex))
+	NSLog("COCO: emitAutoLayout " + String (autoLayoutId) + " with preserved " + String (preservedIndex))
 	let autoRenderedLayouts: [String: Any] = [
 	    "autoLayoutId": autoLayoutId,
 	    "layouts": cellContainers.map { 
