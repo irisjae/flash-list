@@ -17,14 +17,17 @@ import UIKit
 
     @objc func setScrollOffset(_ scrollOffset: Int) {
         self.scrollOffset = CGFloat(scrollOffset)
+        NSLog("scrollOffset " + String(scrollOffset));
     }
 
     @objc func setWindowSize(_ windowSize: Int) {
         self.windowSize = CGFloat(windowSize)
+        NSLog("windowSize " + String(windowSize));
     }
 
     @objc func setRenderAheadOffset(_ renderAheadOffset: Int) {
         self.renderAheadOffset = CGFloat(renderAheadOffset)
+        NSLog("renderAheadOffset " + String(renderAheadOffset));
     }
 
     @objc func setEnableInstrumentation(_ enableInstrumentation: Bool) {
@@ -37,18 +40,22 @@ import UIKit
 
     @objc func setDisableAutoLayout(_ disableAutoLayout: Bool) {
         self.disableAutoLayout = disableAutoLayout
+        NSLog("disableAutoLayout " + String(disableAutoLayout));
     }
 
     @objc func setAutoLayoutId(_ autoLayoutId: Int) {
         self.autoLayoutId = autoLayoutId
+        NSLog("autoLayoutId " + String(autoLayoutId));
     }
 
     @objc func setPreservedIndex(_ preservedIndex: Int) {
         self.preservedIndex = preservedIndex
+        NSLog("preservedIndex " + String(preservedIndex));
     }
 
     @objc func setRenderId(_ renderId: Int) {
 	setNeedsLayout()
+        NSLog("renderId " + String(renderId));
     }
 
     private var horizontal = false
@@ -142,20 +149,28 @@ import UIKit
         var preservedOffset: Int = 0
         if preservedIndex > -1 {
             if preservedIndex <= cellContainers[0].index {
+NSLog ("preserved index " + String(preservedIndex) + ", effective " + cellContainers[0].index)
+NSLog ("preserved cell of index " + String(cellContainers[0].index) + " at y " + String (cellContainers[0].frame.origin.y))
                 preservedOffset = 0
             }
             else if preservedIndex >= cellContainers[cellContainers.count - 1].index {
+NSLog ("preserved index " + String(preservedIndex) + ", effective " + cellContainers[cellContainers.count - 1].index)
+NSLog ("preserved cell of index " + String(cellContainers[cellContainers.count - 1].index) + " at y " + String (cellContainers[cellContainers.count - 1].frame.origin.y))
                 preservedOffset = cellContainers.count - 1
             }
             else {
                 for index in 1..<(cellContainers.count - 1) {
                     if cellContainers[index].index == preservedIndex {
+NSLog ("preserved index " + String(preservedIndex) + ", effective " + cellContainers[index].index)
+NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (cellContainers[index].frame.origin.y))
                         preservedOffset = index
                         break
                     }
                 }
             }
         }
+
+	NSLog("clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
 
         if preservedOffset > 0 {
             for index in (1..<preservedOffset + 1).reversed() {
@@ -167,8 +182,11 @@ import UIKit
                 // Only apply correction if the next cell is consecutive.
                 let isNextCellConsecutive = cellContainer.index == nextCell.index + 1
 
+                NSLog ("cell of index " + String(nextCell.index) + " was y " + String (nextCell.frame.origin.y))
+
                 if isNextCellConsecutive {
                     nextCell.frame.origin.y = cellTop - nextCell.frame.height
+                    NSLog ("corrected cell of index " + String(nextCell.index) + " to y " + String (nextCell.frame.origin.y))
                 }
             }
             // this implementation essentially ignores visibility; this will cause onBlankAreaEvent of preserveVisiblePosition
@@ -238,6 +256,7 @@ import UIKit
             } else {
                 maxBound = max(maxBound, cellBottom)
                 minBound = min(minBound, cellTop)
+                NSLog ("cell of index " + String(nextCell.index) + " was y " + String (nextCell.frame.origin.y))
                 maxBoundNextCell = maxBound
 				if isNextCellConsecutive {
 					if cellLeft < nextCellLeft {
@@ -249,6 +268,7 @@ import UIKit
 						}
 					} else {
 						nextCell.frame.origin.y = maxBound
+                    NSLog ("corrected cell of index " + String(nextCell.index) + " to y " + String (nextCell.frame.origin.y))
 					}
 				}
                 if isNextCellVisible {
