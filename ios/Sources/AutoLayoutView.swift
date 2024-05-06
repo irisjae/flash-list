@@ -79,7 +79,7 @@ import UIKit
         super.layoutSubviews()
         fixLayout()
 
-        guard enableInstrumentation, let scrollView = getScrollView() else { return }
+        let scrollView = getScrollView()
 
         let scrollContainerSize = horizontal ? scrollView.frame.width : scrollView.frame.height
         NSLog("COCO: native scrollContainerSize " + String(Float(scrollContainerSize)));
@@ -94,22 +94,24 @@ import UIKit
         let distanceFromWindowEnd = max(currentScrollOffset + scrollContainerSize - endOffset, 0)
         NSLog("COCO: native distanceFromWindowEnd " + String(Float(distanceFromWindowEnd)));
 
-        let (blankOffsetStart, blankOffsetEnd) = computeBlankFromGivenOffset(
-            currentScrollOffset - startOffset,
-            filledBoundMin: lastMinBound,
-            filledBoundMax: lastMaxBound,
-            renderAheadOffset: renderAheadOffset,
-            windowSize: windowSize,
-            distanceFromWindowStart: distanceFromWindowStart,
-            distanceFromWindowEnd: distanceFromWindowEnd
-        )
+        if enableInstrumentation {
+		let (blankOffsetStart, blankOffsetEnd) = computeBlankFromGivenOffset(
+		    currentScrollOffset - startOffset,
+		    filledBoundMin: lastMinBound,
+		    filledBoundMax: lastMaxBound,
+		    renderAheadOffset: renderAheadOffset,
+		    windowSize: windowSize,
+		    distanceFromWindowStart: distanceFromWindowStart,
+		    distanceFromWindowEnd: distanceFromWindowEnd
+		)
 
-        onBlankAreaEvent?(
-            [
-                "offsetStart": blankOffsetStart,
-                "offsetEnd": blankOffsetEnd,
-            ]
-        )
+		onBlankAreaEvent?(
+		    [
+			"offsetStart": blankOffsetStart,
+			"offsetEnd": blankOffsetEnd,
+		    ]
+		)
+	}
     }
 
     func getScrollView() -> UIScrollView? {
