@@ -56,9 +56,9 @@ import UIKit
                 }
             }
             .sorted(by: { $0.index < $1.index })
-        for i in 0..<(cellContainers.count - 1) {
-NSLog ("COCO: set autolayout cell of index " + String(cellContainers[i].index) + " at y " + String(Float (cellContainers[i].frame.origin.y)) + " , top " + String (Float (cellContainers[i].top)))
-	}
+//        for i in 0..<(cellContainers.count - 1) {
+//NSLog ("COCO: set autolayout cell of index " + String(cellContainers[i].index) + " at y " + String(Float (cellContainers[i].frame.origin.y)) + " , top " + String (Float (cellContainers[i].top)))
+//	}
     }
 
     @objc func setPreservedIndex(_ preservedIndex: Int) {
