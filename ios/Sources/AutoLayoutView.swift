@@ -146,22 +146,28 @@ import UIKit
         let correctedScrollOffset = scrollOffset - (horizontal ? frame.minX : frame.minY)
         lastMaxBoundOverall = 0
 
+	NSLog("clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
+
+        for i in 0..<(cellContainers.count - 1) {
+NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + String(cellContainers[i].index) + " , top " + String (cellContainers[i]top))
+	}
+
         var preservedOffset: Int = 0
         if preservedIndex > -1 {
             if preservedIndex <= cellContainers[0].index {
-NSLog ("preserved index " + String(preservedIndex) + ", effective " + cellContainers[0].index)
+NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[0].index))
 NSLog ("preserved cell of index " + String(cellContainers[0].index) + " at y " + String (cellContainers[0].frame.origin.y))
                 preservedOffset = 0
             }
             else if preservedIndex >= cellContainers[cellContainers.count - 1].index {
-NSLog ("preserved index " + String(preservedIndex) + ", effective " + cellContainers[cellContainers.count - 1].index)
+NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[cellContainers.count - 1].index))
 NSLog ("preserved cell of index " + String(cellContainers[cellContainers.count - 1].index) + " at y " + String (cellContainers[cellContainers.count - 1].frame.origin.y))
                 preservedOffset = cellContainers.count - 1
             }
             else {
                 for index in 1..<(cellContainers.count - 1) {
                     if cellContainers[index].index == preservedIndex {
-NSLog ("preserved index " + String(preservedIndex) + ", effective " + cellContainers[index].index)
+NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[index].index))
 NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (cellContainers[index].frame.origin.y))
                         preservedOffset = index
                         break
@@ -169,8 +175,6 @@ NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (
                 }
             }
         }
-
-	NSLog("clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
 
         if preservedOffset > 0 {
             for index in (1..<preservedOffset + 1).reversed() {
@@ -181,8 +185,6 @@ NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (
 
                 // Only apply correction if the next cell is consecutive.
                 let isNextCellConsecutive = cellContainer.index == nextCell.index + 1
-
-                NSLog ("cell of index " + String(nextCell.index) + " was y " + String (nextCell.frame.origin.y))
 
                 if isNextCellConsecutive {
                     nextCell.frame.origin.y = cellTop - nextCell.frame.height
@@ -256,7 +258,6 @@ NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (
             } else {
                 maxBound = max(maxBound, cellBottom)
                 minBound = min(minBound, cellTop)
-                NSLog ("cell of index " + String(nextCell.index) + " was y " + String (nextCell.frame.origin.y))
                 maxBoundNextCell = maxBound
 				if isNextCellConsecutive {
 					if cellLeft < nextCellLeft {
