@@ -513,6 +513,7 @@ class FlashList<T> extends React.PureComponent<
           ...this.getTransform(),
           ...getCellContainerPlatformStyles(this.props.inverted!!, parentProps),
         }}
+        y={parentProps.y}
         index={parentProps.index}
       >
         <PureComponentWrapper

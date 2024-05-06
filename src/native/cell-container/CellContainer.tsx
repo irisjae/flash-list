@@ -8,7 +8,7 @@ export interface CellContainerProps extends ViewProps {
 const CellContainer = React.forwardRef(
   (props: CellContainerProps, ref: any) => {
 // @ts-ignore
-    return <View ref={ref} top={props.style.top} {...props} />;
+    return <View ref={ref} {...props} />;
   }
 );
 CellContainer.displayName = "CellContainer";

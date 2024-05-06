@@ -4,6 +4,6 @@
 @interface RCT_EXTERN_MODULE(CellContainerManager, RCTViewManager)
 
 RCT_EXPORT_VIEW_PROPERTY(index, NSInteger)
-RCT_EXPORT_VIEW_PROPERTY(top, Double)
+RCT_EXPORT_VIEW_PROPERTY(top, double)
 
 @end

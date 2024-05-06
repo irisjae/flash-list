@@ -95,7 +95,7 @@ var FlashList = /** @class */ (function (_super) {
         _this.itemContainer = function (props, parentProps) {
             var _a;
             var CellRendererComponent = (_a = _this.props.CellRendererComponent) !== null && _a !== void 0 ? _a : CellContainer_1.default;
-            return (react_1.default.createElement(CellRendererComponent, tslib_1.__assign({}, props, { style: tslib_1.__assign(tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, props.style), { flexDirection: _this.props.horizontal ? "row" : "column", alignItems: "stretch" }), _this.getTransform()), (0, PlatformHelper_1.getCellContainerPlatformStyles)(_this.props.inverted, parentProps)), index: parentProps.index }),
+            return (react_1.default.createElement(CellRendererComponent, tslib_1.__assign({}, props, { style: tslib_1.__assign(tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, props.style), { flexDirection: _this.props.horizontal ? "row" : "column", alignItems: "stretch" }), _this.getTransform()), (0, PlatformHelper_1.getCellContainerPlatformStyles)(_this.props.inverted, parentProps)), y: parentProps.y, index: parentProps.index }),
                 react_1.default.createElement(PureComponentWrapper_1.PureComponentWrapper, { extendedState: parentProps.extendedState, internalSnapshot: parentProps.internalSnapshot, data: parentProps.data, arg: parentProps.index, renderer: _this.getCellContainerChild })));
         };
         _this.updateDistanceFromWindow = function (event) {
