@@ -17,17 +17,17 @@ import UIKit
 
     @objc func setScrollOffset(_ scrollOffset: Int) {
         self.scrollOffset = CGFloat(scrollOffset)
-        NSLog("scrollOffset " + String(scrollOffset));
+        NSLog("COCO: scrollOffset " + String(scrollOffset));
     }
 
     @objc func setWindowSize(_ windowSize: Int) {
         self.windowSize = CGFloat(windowSize)
-        NSLog("windowSize " + String(windowSize));
+        NSLog("COCO: windowSize " + String(windowSize));
     }
 
     @objc func setRenderAheadOffset(_ renderAheadOffset: Int) {
         self.renderAheadOffset = CGFloat(renderAheadOffset)
-        NSLog("renderAheadOffset " + String(renderAheadOffset));
+        NSLog("COCO: renderAheadOffset " + String(renderAheadOffset));
     }
 
     @objc func setEnableInstrumentation(_ enableInstrumentation: Bool) {
@@ -40,22 +40,35 @@ import UIKit
 
     @objc func setDisableAutoLayout(_ disableAutoLayout: Bool) {
         self.disableAutoLayout = disableAutoLayout
-        NSLog("disableAutoLayout " + String(disableAutoLayout));
+        NSLog("COCO: disableAutoLayout " + String(disableAutoLayout));
     }
 
     @objc func setAutoLayoutId(_ autoLayoutId: Int) {
         self.autoLayoutId = autoLayoutId
-        NSLog("autoLayoutId " + String(autoLayoutId));
+        NSLog("COCO: autoLayoutId " + String(autoLayoutId));
+        let cellContainers = subviews
+            .compactMap { subview -> CellContainer? in
+                if let cellContainer = subview as? CellContainer {
+                    return cellContainer
+                } else {
+                    assertionFailure("CellRendererComponent outer view should always be CellContainer. Learn more here: https://shopify.github.io/flash-list/docs/usage#cellrenderercomponent.")
+                    return nil
+                }
+            }
+            .sorted(by: { $0.index < $1.index })
+        for i in 0..<(cellContainers.count - 1) {
+NSLog ("COCO: set autolayout cell of index " + String(cellContainers[i].index) + " at y " + String(Float (cellContainers[i].frame.origin.y)) + " , top " + String (Float (cellContainers[i].top)))
+	}
     }
 
     @objc func setPreservedIndex(_ preservedIndex: Int) {
         self.preservedIndex = preservedIndex
-        NSLog("preservedIndex " + String(preservedIndex));
+        NSLog("COCO: preservedIndex " + String(preservedIndex));
     }
 
     @objc func setRenderId(_ renderId: Int) {
 	setNeedsLayout()
-        NSLog("renderId " + String(renderId));
+        NSLog("COCO: renderId " + String(renderId));
     }
 
     private var horizontal = false
@@ -149,20 +162,20 @@ import UIKit
         var preservedOffset: Int = 0
         if preservedIndex > -1 {
             if preservedIndex <= cellContainers[0].index {
-NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[0].index))
-NSLog ("preserved cell of index " + String(cellContainers[0].index) + " at y " + String (Float (cellContainers[0].frame.origin.y)))
+NSLog ("COCO: preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[0].index))
+NSLog ("COCO: preserved cell of index " + String(cellContainers[0].index) + " at y " + String (Float (cellContainers[0].frame.origin.y)))
                 preservedOffset = 0
             }
             else if preservedIndex >= cellContainers[cellContainers.count - 1].index {
-NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[cellContainers.count - 1].index))
-NSLog ("preserved cell of index " + String(cellContainers[cellContainers.count - 1].index) + " at y " + String (Float (cellContainers[cellContainers.count - 1].frame.origin.y)))
+NSLog ("COCO: preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[cellContainers.count - 1].index))
+NSLog ("COCO: preserved cell of index " + String(cellContainers[cellContainers.count - 1].index) + " at y " + String (Float (cellContainers[cellContainers.count - 1].frame.origin.y)))
                 preservedOffset = cellContainers.count - 1
             }
             else {
                 for index in 1..<(cellContainers.count - 1) {
                     if cellContainers[index].index == preservedIndex {
-NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[index].index))
-NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (Float (cellContainers[index].frame.origin.y)))
+NSLog ("COCO: preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[index].index))
+NSLog ("COCO: preserved cell of index " + String(preservedIndex) + " at y " + String (Float (cellContainers[index].frame.origin.y)))
                         preservedOffset = index
                         break
                     }
@@ -170,10 +183,10 @@ NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (
             }
         }
 
-	NSLog("clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
+	NSLog("COCO: clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
 
         for i in 0..<(cellContainers.count - 1) {
-NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + String(cellContainers[i].index) + " , top " + String (Float (cellContainers[i].top)))
+NSLog ("COCO: original cell of index " + String(cellContainers[i].index) + " at y " + String(Float (cellContainers[i].frame.origin.y)) + " , top " + String (Float (cellContainers[i].top)))
 	}
 
 
@@ -189,7 +202,7 @@ NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + 
 
                 if isNextCellConsecutive {
                     nextCell.frame.origin.y = cellTop - nextCell.frame.height
-                    NSLog ("corrected cell of index " + String(nextCell.index) + " to y " + String (Float (nextCell.frame.origin.y)))
+                    NSLog ("COCO: corrected cell of index " + String(nextCell.index) + " to y " + String (Float (nextCell.frame.origin.y)))
                 }
             }
             // this implementation essentially ignores visibility; this will cause onBlankAreaEvent of preserveVisiblePosition
@@ -270,7 +283,7 @@ NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + 
 						}
 					} else {
 						nextCell.frame.origin.y = maxBound
-                    NSLog ("corrected cell of index " + String(nextCell.index) + " to y " + String (Float (nextCell.frame.origin.y)))
+                    NSLog ("COCO: corrected cell of index " + String(nextCell.index) + " to y " + String (Float (nextCell.frame.origin.y)))
 					}
 				}
                 if isNextCellVisible {
