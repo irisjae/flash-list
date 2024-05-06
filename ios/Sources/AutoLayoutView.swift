@@ -146,12 +146,6 @@ import UIKit
         let correctedScrollOffset = scrollOffset - (horizontal ? frame.minX : frame.minY)
         lastMaxBoundOverall = 0
 
-	NSLog("clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
-
-        for i in 0..<(cellContainers.count - 1) {
-NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + String(cellContainers[i].index) + " , top " + String (cellContainers[i].top))
-	}
-
         var preservedOffset: Int = 0
         if preservedIndex > -1 {
             if preservedIndex <= cellContainers[0].index {
@@ -175,6 +169,13 @@ NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (
                 }
             }
         }
+
+	NSLog("clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
+
+        for i in 0..<(cellContainers.count - 1) {
+NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + String(cellContainers[i].index) + " , top " + String (cellContainers[i].top))
+	}
+
 
         if preservedOffset > 0 {
             for index in (1..<preservedOffset + 1).reversed() {
