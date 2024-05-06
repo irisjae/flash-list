@@ -149,7 +149,7 @@ import UIKit
 	NSLog("clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
 
         for i in 0..<(cellContainers.count - 1) {
-NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + String(cellContainers[i].index) + " , top " + String (cellContainers[i]top))
+NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + String(cellContainers[i].index) + " , top " + String (cellContainers[i].top))
 	}
 
         var preservedOffset: Int = 0
