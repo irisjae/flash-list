@@ -150,19 +150,19 @@ import UIKit
         if preservedIndex > -1 {
             if preservedIndex <= cellContainers[0].index {
 NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[0].index))
-NSLog ("preserved cell of index " + String(cellContainers[0].index) + " at y " + String (cellContainers[0].frame.origin.y))
+NSLog ("preserved cell of index " + String(cellContainers[0].index) + " at y " + String (Float (cellContainers[0].frame.origin.y)))
                 preservedOffset = 0
             }
             else if preservedIndex >= cellContainers[cellContainers.count - 1].index {
 NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[cellContainers.count - 1].index))
-NSLog ("preserved cell of index " + String(cellContainers[cellContainers.count - 1].index) + " at y " + String (cellContainers[cellContainers.count - 1].frame.origin.y))
+NSLog ("preserved cell of index " + String(cellContainers[cellContainers.count - 1].index) + " at y " + String (Float (cellContainers[cellContainers.count - 1].frame.origin.y)))
                 preservedOffset = cellContainers.count - 1
             }
             else {
                 for index in 1..<(cellContainers.count - 1) {
                     if cellContainers[index].index == preservedIndex {
 NSLog ("preserved index " + String(preservedIndex) + ", effective " + String(cellContainers[index].index))
-NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (cellContainers[index].frame.origin.y))
+NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (Float (cellContainers[index].frame.origin.y)))
                         preservedOffset = index
                         break
                     }
@@ -173,7 +173,7 @@ NSLog ("preserved cell of index " + String(preservedIndex) + " at y " + String (
 	NSLog("clear gaps with preservedIndex " + String(preservedIndex) + " and preservedOffset " + String(preservedOffset) + "  autoLayoutId " + String(autoLayoutId))
 
         for i in 0..<(cellContainers.count - 1) {
-NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + String(cellContainers[i].index) + " , top " + String (cellContainers[i].top))
+NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + String(cellContainers[i].index) + " , top " + String (Float (cellContainers[i].top)))
 	}
 
 
@@ -189,7 +189,7 @@ NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + 
 
                 if isNextCellConsecutive {
                     nextCell.frame.origin.y = cellTop - nextCell.frame.height
-                    NSLog ("corrected cell of index " + String(nextCell.index) + " to y " + String (nextCell.frame.origin.y))
+                    NSLog ("corrected cell of index " + String(nextCell.index) + " to y " + String (Float (nextCell.frame.origin.y)))
                 }
             }
             // this implementation essentially ignores visibility; this will cause onBlankAreaEvent of preserveVisiblePosition
@@ -270,7 +270,7 @@ NSLog ("original cell of index " + String(cellContainers[i].index) + " at y " + 
 						}
 					} else {
 						nextCell.frame.origin.y = maxBound
-                    NSLog ("corrected cell of index " + String(nextCell.index) + " to y " + String (nextCell.frame.origin.y))
+                    NSLog ("corrected cell of index " + String(nextCell.index) + " to y " + String (Float (nextCell.frame.origin.y)))
 					}
 				}
                 if isNextCellVisible {
