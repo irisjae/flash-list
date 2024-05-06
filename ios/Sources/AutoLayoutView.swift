@@ -46,16 +46,16 @@ import UIKit
     @objc func setAutoLayoutId(_ autoLayoutId: Int) {
         self.autoLayoutId = autoLayoutId
         NSLog("COCO: autoLayoutId " + String(autoLayoutId));
-        let cellContainers = subviews
-            .compactMap { subview -> CellContainer? in
-                if let cellContainer = subview as? CellContainer {
-                    return cellContainer
-                } else {
-                    assertionFailure("CellRendererComponent outer view should always be CellContainer. Learn more here: https://shopify.github.io/flash-list/docs/usage#cellrenderercomponent.")
-                    return nil
-                }
-            }
-            .sorted(by: { $0.index < $1.index })
+//        let cellContainers = subviews
+//            .compactMap { subview -> CellContainer? in
+//                if let cellContainer = subview as? CellContainer {
+//                    return cellContainer
+//                } else {
+//                    assertionFailure("CellRendererComponent outer view should always be CellContainer. Learn more here: https://shopify.github.io/flash-list/docs/usage#cellrenderercomponent.")
+//                    return nil
+//                }
+//            }
+//            .sorted(by: { $0.index < $1.index })
 //        for i in 0..<(cellContainers.count - 1) {
 //NSLog ("COCO: set autolayout cell of index " + String(cellContainers[i].index) + " at y " + String(Float (cellContainers[i].frame.origin.y)) + " , top " + String (Float (cellContainers[i].top)))
 //	}

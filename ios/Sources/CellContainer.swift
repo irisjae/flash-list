@@ -7,7 +7,7 @@ import Foundation
     @objc func setIndex(_ index: Int) {
         self.index = index
     }
-    @objc func setDouble(_ top: Double) {
+    @objc func setTop(_ top: Double) {
         self.top = top
     }
 }
