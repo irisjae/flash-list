@@ -85,7 +85,7 @@
     "jestSetup.js"
   ],
   "dependencies": {
-    "recyclerlistview": "npm:@irisjae/recyclerlistview@1.0.1",
+    "recyclerlistview": "https://github.com/irisjae/recyclerlistview/tarball/scroll-fix",
     "tslib": "2.4.0"
   }
 }
